@@ -1,8 +1,22 @@
+buildscript {
+    repositories {
+        // Gradle 4.1 and higher include support for Google's Maven repo using
+        // the google() method. And you need to include this repo to download
+        // Android Gradle plugin 3.0.0 or higher.
+        google()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.0'
+    }
+}
+
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion exCompileSdkVersion
-    buildToolsVersion exBuildToolsVersion
+    compileSdkVersion 30
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "xeed.xposed.fxrmod"
@@ -22,7 +36,21 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        // Gradle 4.1 and higher include support for Google's Maven repo using
+        // the google() method. And you need to include this repo to download
+        // Android Gradle plugin 3.0.0 or higher.
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
 dependencies {
+    runtimeOnly 'org.jetbrains.kotlin:kotlin-reflect:1.5.31'
+    implementation 'com.android.support:support-v4:21.0.3'
     compileOnly project(':hax')
     implementation project(':library')
 
